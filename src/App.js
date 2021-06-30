@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter basename="./" >
-                
+                <h1>asds</h1>
       </BrowserRouter>
     );
   }
