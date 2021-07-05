@@ -1,0 +1,19 @@
+.containerDiv {
+    width: 100%;
+    height: 25rem;
+    background-image:url("../fondoSearch.jpg");
+    background-position: center;
+}
+.inputSearch{
+ width: 40rem !important;
+ background-color: #FFFAFA;
+}
+.autoComplete{
+    margin-left: 20%;
+}
+
+.filterText{
+    text-decoration: underline;
+    margin-top: 0;
+    margin-left: 63%;
+}

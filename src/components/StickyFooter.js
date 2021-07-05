@@ -7,7 +7,7 @@ import Link  from '@material-ui/core/Link';
 export default function StickyFooter() {
 
   return (
-    <Box px={{xs: 3, sm:10}} py={{xs: 5, sm:10}}bgcolor="text.secondary" color="white" >
+    <Box px={{xs: 3, sm:10}} py={{xs: 5, sm:10}}bgcolor="#8AA8DC" color="white" >
       <Container maxWidth="lg">
         <Grid container spacing={6}>
           <Grid item xd={12} sm={6}>
