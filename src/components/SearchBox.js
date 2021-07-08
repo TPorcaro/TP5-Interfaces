@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/styles/search.css";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
+import { Grid } from "@material-ui/core";
+import LoginPopup from './LoginPopup.js';
 function SearchBox() {
-  const top100Films = [
+  const options = [
     { title: "Alcalá de Henares" },
     { title: "Ávila" },
     { title: "Barcelona" },
@@ -44,25 +45,45 @@ function SearchBox() {
     { title: "Macau" },
     { title: "Londres" },
   ];
+  const [searchTerm, setSearchTerm] = useState("  ");
+  const [openPopup, setOpenPopup] = useState(false);
   return (
-    <div class="containerDiv">
-      <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        options={top100Films.map((option) => option.title)}
-        className="autoComplete"
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Buscar destino"
-            margin="normal"
-            variant="outlined"
-            className="inputSearch"
-            InputProps={{ ...params.InputProps, type: "search" }}
+    <div className="searchCtn">
+      <Grid container="true" justify="center" >
+        <Grid item="true">
+          <input
+            type="text"
+            placeholder="Buscar destino.."
+            onChange={(event) => setSearchTerm(event.target.value)}
           />
-        )}
+          {options.filter((val) => {
+            if (searchTerm.length > 2) { 
+              if (val.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+              return val;
+              }
+          }return null;
+        })
+        .map((val, key) => {
+          return key <= 5 ? (
+            <div className="user" key={key}>
+              <p>{val.title}</p>
+            </div>
+          ) : (
+            ""
+          );
+        })}
+        </Grid>
+        <Grid item="true">
+          <Button size="large" className="btnSearch" onClick = {() => setOpenPopup(true)}>
+            <SearchIcon />
+          </Button>
+        </Grid>
+      </Grid>
+        <LoginPopup 
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        title="Iniciar sesión"
         />
-        <a className="filterText">Filtros</a>
     </div>
   );
 }
