@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -52,9 +52,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPopup(props)  {
     const classes = useStyles();
-    const { title, children, openPopup, setOpenPopup } = props;
+    const [acceptTerms, setAcceptTerms] = useState(false);
+    const {  openPopup, setOpenPopup } = props;
+    console.log(props.login)
     return (
       <Dialog open={openPopup} >
+        { props.login === true ?
         <DialogContent>
             <Button
                 type="submit"
@@ -62,71 +65,176 @@ export default function LoginPopup(props)  {
                 onClick={()=> {props.setOpenPopup(false)}}
             >
                <CloseIcon className={classes.close}/>
-          </Button>
+            </Button>
         <Container component="main" maxWidth="xs" >
-      <CssBaseline />
-      <div className={classes.paper} >
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-        Iniciar sesión
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="E-mail"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Contraseña"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recordar contraseña"
-          />
-          <Button
+            <CssBaseline />
+        <div className={classes.paper} >
+            <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+            Iniciar sesión
+            </Typography>
+            <form className={classes.form} noValidate>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="E-mail"
+                name="email"
+                autoComplete="email"
+                autoFocus
+            />
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Contraseña"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+            />
+            <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Recordar contraseña"
+            />
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+                Iniciar sesión
+            </Button>
+            <Grid container>
+                
+                <Grid item>
+                <Link onClick={()=>props.setLogin(false)} variant="body2">
+                    {"No tienes cuenta? Regístrate"}
+                </Link>
+                </Grid>
+            </Grid>
+            </form>
+        </div>
+        <Box mt={8}>
+            <Copyright />
+        </Box>
+        </Container>
+        </DialogContent>
+        :
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Button
+                type="submit"
+                variant="outlined"
+                onClick={()=> {props.setOpenPopup(false)}}
+            >
+               <CloseIcon className={classes.close}/>
+            </Button>
+        <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+            Registro
+            </Typography>
+            <form className={classes.form} noValidate>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                <TextField
+                    autoComplete="fname"
+                    name="firstName"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="Nombre"
+                    autoFocus
+                />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Apellido"
+                    name="Apellido"
+                    autoComplete="lname"
+                />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="E-mail"
+                    name="email"
+                    autoComplete="email"
+                />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Contraseña"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                />
+                
+                </Grid>
+                <Grid item xs={12}>
+                <FormControlLabel
+                    control={<Checkbox value="allowExtraEmails" color="primary" onChange={()=> setAcceptTerms(!acceptTerms)}/>}
+                    label="Acepto los terminos y condiciones."
+                />
+                </Grid>
+            </Grid>
+            {acceptTerms === true ? 
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+                Registrarse
+            </Button>: 
+            <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
+            disabled
             className={classes.submit}
-          >
-            Iniciar sesión
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Olvido su contraseña?
-              </Link>
+            >
+                Registrarse
+            </Button>
+            }
+            
+            <Grid container justifyContent="flex-end">
+                <Grid item>
+                <Link onClick={()=>props.setLogin(true)} variant="body2">
+                   Ya tienes una cuenta? Inicia sesión
+                </Link>
+                </Grid>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"No tienes cuenta? Regístrate"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-        </DialogContent>
-      </Dialog>
+            </form>
+        </div>
+        <Box mt={5}>
+            <Copyright />
+        </Box>
+        </Container>
+        }
+    </Dialog>
     );
 }

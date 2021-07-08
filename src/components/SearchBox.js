@@ -47,6 +47,7 @@ function SearchBox() {
   ];
   const [searchTerm, setSearchTerm] = useState("  ");
   const [openPopup, setOpenPopup] = useState(false);
+  const [login, setLogin] = useState(false);
   return (
     <div className="searchCtn">
       <Grid container="true" justify="center" >
@@ -83,6 +84,8 @@ function SearchBox() {
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
         title="Iniciar sesión"
+        login={login}
+        setLogin={setLogin}
         />
     </div>
   );
