@@ -1,0 +1,18 @@
+.advertisingCtn{
+    width: 80%;
+    height: 20rem;
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.picture{
+    width: 27rem;
+    height: 20rem;
+    margin-left: 20px;
+    background-image: url("../add.jpeg");
+    background-repeat: no-repeat;
+
+}
+h2{
+    font-family: Arial, Helvetica, sand-serif;
+}
