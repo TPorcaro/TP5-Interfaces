@@ -11,16 +11,15 @@ class App extends Component {
   render() {
     return (
 
-      // <BrowserRouter basename="./" >
+       <BrowserRouter basename="./" >
            <NavBar></NavBar>
-   //<BrowserRouter basename="./" >
           <SearchBox></SearchBox>
           <Advertising />
           <div className="margened">
             <CardGroup></CardGroup>
           </div>
           <StickyFooter></StickyFooter>
-      //</BrowserRouter>
+      </BrowserRouter>
     );
   }
 }
