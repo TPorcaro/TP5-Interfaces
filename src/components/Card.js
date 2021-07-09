@@ -39,17 +39,20 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 150,
   },
   typeCard:{
-    marginLeft: -10,
+    height: 30,
+    width: 130,
     boxShadow: '.1px .1px',
     fontSize: 20,
     position: 'absolute',
-    top: 28,
+    top: 20,
+    left: -35,
     backgroundColor: '#B7CCEF',
     paddingLeft: 10,
     paddingRight: 10,
-    borderRadius: 10,
+    paddingTop: 0,
+    paddingBottom: 0,
     transform: 'rotate(-45deg)',
-    zIndex: 1
+    zIndex: 5
   }
 }));
 export default function ImgMediaCard(props) {
@@ -79,7 +82,7 @@ export default function ImgMediaCard(props) {
             {props.text}
           </Typography>
         </CardContent>
-        <Typography className={classes.typeCard} variant="h5" color="black" component="p">
+        <Typography className={classes.typeCard} align="center" variant="h5" color="black" component="p">
           Premium
         </Typography>
       </CardActionArea>

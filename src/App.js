@@ -7,20 +7,25 @@ import Card from './components/Card'
 import CardGroup from './components/CardGroup';
 import SearchBox from './components/SearchBox';
 import Advertising from './components/Advertising';
+import CardHorizontal from './components/CardHorizontal';
+import img1 from './assets/images/casas-busqueda2.jpg';
+
 class App extends Component {
   render() {
+    let defaultText = 'bla bla bla bla bla bla';
+        let defaultTitle = 'Title';
+        let defaultPrice = 5000;
     return (
 
       // <BrowserRouter basename="./" >
-           <NavBar></NavBar>
-   //<BrowserRouter basename="./" >
-          <SearchBox></SearchBox>
-          <Advertising />
+      //      <NavBar></NavBar>
+      //     <SearchBox></SearchBox>
+      //     <Advertising />
           <div className="margened">
-            <CardGroup></CardGroup>
+            <CardHorizontal img={img1} type={'casa'} title={defaultTitle} price={defaultPrice} text={defaultText} hasTv={true} hasAirConditioner={true} hasHeater={true} hasWifi={true}></CardHorizontal>
           </div>
-          <StickyFooter></StickyFooter>
-      //</BrowserRouter>
+      //     <StickyFooter></StickyFooter>
+      // </BrowserRouter>
     );
   }
 }
