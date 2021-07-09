@@ -5,17 +5,22 @@ import NavBar from './components/NavBar';
 import StickyFooter from './components/StickyFooter';
 import Card from './components/Card'
 import CardGroup from './components/CardGroup';
+import SearchBox from './components/SearchBox';
+import Advertising from './components/Advertising';
 class App extends Component {
   render() {
     return (
-      // <BrowserRouter basename="./" >
-      //     <NavBar></NavBar>
-      <div className="margened">
 
-        <CardGroup></CardGroup>
-      </div>
-      //     <StickyFooter></StickyFooter>
-      // </BrowserRouter>
+      // <BrowserRouter basename="./" >
+           <NavBar></NavBar>
+   //<BrowserRouter basename="./" >
+          <SearchBox></SearchBox>
+          <Advertising />
+          <div className="margened">
+            <CardGroup></CardGroup>
+          </div>
+          <StickyFooter></StickyFooter>
+      //</BrowserRouter>
     );
   }
 }

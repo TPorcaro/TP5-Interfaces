@@ -1,63 +1,51 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
-  main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-  },
-  footer: {
-    padding: theme.spacing(3, 2),
-    marginTop: 'auto',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
-  },
-}));
+import Grid  from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Link  from '@material-ui/core/Link';
 
 export default function StickyFooter() {
-  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Container component="main" className={classes.main} maxWidth="sm">
-        <Typography variant="h2" component="h1" gutterBottom>
-          Sticky footer
-        </Typography>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {'Pin a footer to the bottom of the viewport.'}
-          {'The footer will move as the main element of the page grows.'}
-        </Typography>
-        <Typography variant="body1">Sticky footer placeholder.</Typography>
+    <Box px={{xs: 3, sm:10}} py={{xs: 5, sm:10}}bgcolor="#8AA8DC" color="white" >
+      <Container maxWidth="lg">
+        <Grid container spacing={6}>
+          <Grid item xd={12} sm={6}>
+            <Box borderBottom={1}>Ayuda</Box>
+            <Box>
+              <Link href="/" color="inherit">
+                Preguntas frecuentes
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/" color="inherit">
+                Soporte
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/" color="inherit">
+               Contacto
+              </Link>
+            </Box>
+          </Grid>
+          <Grid item xd={12} sm={6}>
+            <Box borderBottom={1}>Cuenta</Box>
+            <Box>
+              <Link href="/" color="inherit">
+                Iniciar Sesión
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/" color="inherit">
+                Registrarte
+              </Link>
+            </Box>
+          </Grid>
+        </Grid>
+        <Box textAlign="center" pt ={{xs: 5, sm: 10}} pb={{xd: 5, sm: 0}}>
+          @Términos y condiciones 2021
+        </Box>
       </Container>
-      <footer className={classes.footer}>
-        <Container maxWidth="sm">
-          <Typography variant="body1">My sticky footer can be found here.</Typography>
-          <Copyright />
-        </Container>
-      </footer>
-    </div>
+    </Box>
   );
 }
