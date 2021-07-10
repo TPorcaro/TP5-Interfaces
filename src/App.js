@@ -10,6 +10,9 @@ import Advertising from './components/Advertising';
 import Search from './components/Search.js';
 class App extends Component {
   render() {
+    let defaultText = 'bla bla bla bla bla bla';
+        let defaultTitle = 'Title';
+        let defaultPrice = 5000;
     return (
 
        <BrowserRouter basename="./" >

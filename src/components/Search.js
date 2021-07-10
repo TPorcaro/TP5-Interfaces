@@ -4,7 +4,7 @@ import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
 import { Grid } from "@material-ui/core";
 import FilterCategory from './FilterCategory';
-
+import CardHorizontal from './CardHorizontal';
 const useStyles = makeStyles((theme) => ({
     titleCtn : {  width: '100%',},
     searchTitle: {marginLeft: "10px"},
