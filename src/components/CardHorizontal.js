@@ -13,15 +13,17 @@ import airConditioner from '../assets/air-conditioner.svg';
 import heater from '../assets/heater.svg';
 import tv from '../assets/tv.svg';
 import wifi from '../assets/wifi.svg';
+import Grow from '@material-ui/core/Grow';
 const useStyles = makeStyles((theme) => ({
-  root: {
+  card: {
     display: 'flex',
-    maxWidth: 600,
     height:150,
-    minWidth: 600,
+    marginBottom: 10,
+    marginRight:20,
+    width: 750,
     transition: theme.transitions.create(["transform"]),
     '&:hover':{
-      transform: "scale3d(1.1,1.1,1.1)"
+      transform: "scale3d(1.1,1.1,1.1)  !important"
     },
   },
   details: {
@@ -32,13 +34,13 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: 150,
+    width: 200,
     minWidth: 150,
   },
   favoriteIcon:{
     position: 'relative',
     color: 'gray',
-    right:-380,
+    right:-450,
     width:5,
     height:5,
     transition: theme.transitions.create(["transform"]),
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   price:{
     position: 'relative',
-    right : -340,
+    right : -450,
     bottom: 55,
     width: 100,
     margin: 0,
@@ -88,58 +90,60 @@ export default function CardHorizontal(props) {
   const [hoverFavoriteIcon, setHoverFavoriteIcon] = React.useState(false);
 
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.cover}
-        image={props.img}
-      />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-        <IconButton className={classes.favoriteIcon} onMouseEnter={() => setHoverFavoriteIcon(true)} onMouseLeave={() => setHoverFavoriteIcon(false)}>
-          {hoverFavoriteIcon 
-          ? <FavoriteIcon  />
-          : <FavoriteBorderIcon />
-          }
-        </IconButton>
-        <Container className={classes.containerText}>
-            <Typography className={classes.type} variant="overline" >
-                {props.type} en alquiler
+    <Grow in={true}>
+      <Card className={classes.card}>
+        <CardMedia
+          className={classes.cover}
+          image={props.img}
+        />
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+          <IconButton className={classes.favoriteIcon} onMouseEnter={() => setHoverFavoriteIcon(true)} onMouseLeave={() => setHoverFavoriteIcon(false)}>
+            {hoverFavoriteIcon 
+            ? <FavoriteIcon  />
+            : <FavoriteBorderIcon />
+            }
+          </IconButton>
+          <Container className={classes.containerText}>
+              <Typography className={classes.type} variant="overline" >
+                  {props.type} en alquiler
+              </Typography>
+            <Typography component="h5" variant="subtitle1">
+              {props.title}
             </Typography>
-          <Typography component="h5" variant="h5">
-            {props.title}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {props.text}
-          </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {props.text}
+            </Typography>
 
-        </Container>
-          <Container className={classes.iconContainer}>
-              {props.hasAirConditioner &&
-                <Icon className={classes.icon}>
-                    <img src={airConditioner} height={25} width={25}/>
-                </Icon>
-              }
-              {props.hasHeater && 
-                <Icon className={classes.icon}>
-                    <img src={heater} height={25} width={25}/>
-                </Icon>
-              }
-              {props.hasTv && 
-                <Icon className={classes.icon}>
-                    <img src={tv} height={25} width={25}/>
-                </Icon>
-              }
-              {props.hasWifi && 
-                <Icon className={classes.icon}>
-                    <img src={wifi} height={25} width={25}/>
-                </Icon>
-              }
           </Container>
-          <Typography className={classes.price} variant="h5" color="black" component="p">
-            $ {props.price}
-          </Typography>
-        </CardContent>
-      </div>
-    </Card>
+            <Container className={classes.iconContainer}>
+                {props.hasAirConditioner &&
+                  <Icon className={classes.icon}>
+                      <img src={airConditioner} height={25} width={25}/>
+                  </Icon>
+                }
+                {props.hasHeater && 
+                  <Icon className={classes.icon}>
+                      <img src={heater} height={25} width={25}/>
+                  </Icon>
+                }
+                {props.hasTv && 
+                  <Icon className={classes.icon}>
+                      <img src={tv} height={25} width={25}/>
+                  </Icon>
+                }
+                {props.hasWifi && 
+                  <Icon className={classes.icon}>
+                      <img src={wifi} height={25} width={25}/>
+                  </Icon>
+                }
+            </Container>
+            <Typography className={classes.price} variant="h5" color="black" component="p">
+              $ {props.price}
+            </Typography>
+          </CardContent>
+        </div>
+      </Card>
+    </Grow>
   );
 }

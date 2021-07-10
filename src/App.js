@@ -16,7 +16,8 @@ class App extends Component {
     return (
 
        <BrowserRouter basename="./" >
-          {/*  <NavBar></NavBar>
+         <NavBar></NavBar>
+          {/*  
           <SearchBox></SearchBox>
           <Advertising />
           <div className="margened">

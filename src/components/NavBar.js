@@ -8,20 +8,24 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
-
+import { Icon } from '@material-ui/core';
+import logo from '../assets/airnbn.svg';
+import Container from '@material-ui/core/Container'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
-  },
-  title: {
     flexGrow: 1,
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'block',
     },
+  },
+  title: {
+    color: 'white',
+    marginLeft: 10,
   },
   search: {
     position: 'relative',
@@ -54,16 +58,19 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(2)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: '20ch',
       '&:focus': {
-        width: '30ch',
+        width: 'ch',
       },
     },
   },
+  logoContainer:{
+    zIndex: 2
+  }
 }));
 
 export default function NavBar() {
@@ -81,9 +88,14 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
+          <Container classname={classes.logoContainer}>
+            <IconButton onClick={() => {console.log('click logo')}} component="span" >
+              <img src={logo} height={50} width={50} />
+            <Typography className={classes.title}  variant="h6">
+              AIRNBN
+            </Typography>
+            </IconButton>
+          </Container>
           <div className={classes.search}> 
             <InputBase
               placeholder="Search…"
