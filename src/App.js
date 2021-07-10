@@ -7,18 +7,21 @@ import Card from './components/Card'
 import CardGroup from './components/CardGroup';
 import SearchBox from './components/SearchBox';
 import Advertising from './components/Advertising';
+import Search from './components/Search.js';
 class App extends Component {
   render() {
     return (
 
        <BrowserRouter basename="./" >
-           <NavBar></NavBar>
+          {/*  <NavBar></NavBar>
           <SearchBox></SearchBox>
           <Advertising />
           <div className="margened">
+            
             <CardGroup></CardGroup>
           </div>
-          <StickyFooter></StickyFooter>
+          <StickyFooter></StickyFooter> */}
+          <Search />
       </BrowserRouter>
     );
   }
