@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     display: 'flex',
     height:150,
-    marginBottom: 10,
+    marginBottom: 40,
     marginRight:20,
     width: 750,
     transition: theme.transitions.create(["transform"]),

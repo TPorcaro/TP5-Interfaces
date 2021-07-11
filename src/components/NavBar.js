@@ -70,6 +70,24 @@ const useStyles = makeStyles((theme) => ({
   },
   logoContainer:{
     zIndex: 2
+  },
+  register:{
+    backgroundColor: '#FBFF00 !important',
+    height: 40,
+    color: 'black',
+    marginRight: 15,
+  },
+  signIn:{
+    backgroundColor: '#FBFF00 !important',
+    height: 40,
+    width: 150,
+    color: 'black'
+  },
+  btnContainer:{
+    display: 'flex',
+    flexDirection: 'row',
+    position: 'relative',
+    left: -100,
   }
 }));
 
@@ -108,13 +126,15 @@ export default function NavBar() {
              <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-          </div>
-            <Button variant="contained" color="primary">
-                Primary
+          </div> 
+          <Container className={classes.btnContainer}>
+            <Button className={classes.register} variant="contained">
+                Registrese
             </Button>
-            <Button variant="contained" color="primary">
-                Primary
+            <Button className={classes.signIn} variant="contained">
+                Iniciar sesion
             </Button>
+          </Container>
         </Toolbar>
       </AppBar>
     </div>

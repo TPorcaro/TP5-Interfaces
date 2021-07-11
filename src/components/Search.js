@@ -15,8 +15,11 @@ import img2 from '../assets/images/casas-busqueda2.jpg'
 import img3 from '../assets/images/casas-busqueda3.jpg'
 import img4 from '../assets/images/casas-busqueda4.jpg'
 import cloneDeep from 'lodash.clonedeep';
+import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FilterDate from './FilterDate';
+import FilterPrice from './FilterPrice';
+
 const useStyles = makeStyles((theme) => ({
     titleCtn : {  width: '100%',},
     searchTitle: {marginLeft: "10px"},
@@ -31,12 +34,18 @@ const useStyles = makeStyles((theme) => ({
       filterBox: {
         padding: theme.spacing(2),
         marginLeft: theme.spacing(2),
-        height: "40rem",
+        height: "60rem",
       },
       filterTitle:{
         position: 'relative',
-        margin:'0 auto 0 auto',
-        width:100,
+        margin:'0px auto 0 auto',
+        width:250,
+        fontSize:24,
+      },
+      filterTitleDate:{
+        position: 'relative',
+        margin:'10px auto 0 auto',
+        width:250,
       },
       formControl: {
         margin: theme.spacing(1),
@@ -50,6 +59,13 @@ const useStyles = makeStyles((theme) => ({
         top: '50%',
         left: '50%',
         marginRight: '-50%',
+      },
+      divider:{
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+      },
+      cardContainer: {
+        marginLeft: 50,
       }
 
 }));
@@ -176,13 +192,22 @@ export default function Search(props) {
             title ="Tipo de espacio"
             items = {espacios} 
             quantity={espacios.length}/>
-            <Divider />
+            <Divider className={classes.divider} />
             <FilterCategory 
             title ="Servicios"
             items = {servicios} 
             quantity={servicios.length}/>
-            <FilterDate>
-            </FilterDate>
+            <Divider />
+            <Typography align="center" className={classes.filterTitleDate}>
+              Fechas de su estadia
+            </Typography>
+            <FilterDate title={'Fecha de inicio:'}/>
+            <FilterDate title={'Fecha de salida:'}/>
+            <Divider />
+            <Typography align="center" className={classes.filterTitleDate}>
+              Precios
+            </Typography>
+            <FilterPrice title={'Rango de precios'}/>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} spacing={3}>
@@ -202,19 +227,21 @@ export default function Search(props) {
             {loading ?
             <CircularProgress size={100} className={classes.loader}/>
             :<>
-             {sortCards(sort).map((card,i) => {
-              return <CardHorizontal
-                title={card.title}
-                text={card.text}
-                price={card.price}
-                img={card.img}
-                hasHeater={card.hasHeater}
-                hasTv={card.hasTv}
-                hasAirConditioner={card.hasAirConditioner}
-                hasWifi={card.hasWifi}
-                type={card.type}
-              />
-            })}
+            <Container className={classes.cardContainer}>
+              {sortCards(sort).map((card,i) => {
+                return <CardHorizontal
+                  title={card.title}
+                  text={card.text}
+                  price={card.price}
+                  img={card.img}
+                  hasHeater={card.hasHeater}
+                  hasTv={card.hasTv}
+                  hasAirConditioner={card.hasAirConditioner}
+                  hasWifi={card.hasWifi}
+                  type={card.type}
+                />
+              })}
+            </Container>
             </>
             }
         </Grid>
