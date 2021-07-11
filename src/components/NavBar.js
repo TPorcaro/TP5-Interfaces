@@ -76,12 +76,22 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
     color: 'black',
     marginRight: 15,
+    transition: theme.transitions.create(["transform", "box-shadow"]),
+    '&:hover':{
+      transform: "scale3d(1.1,1.1,1.1) translateX(-3px)  !important",
+      boxShadow: `1px 1px #333, 2px 2px #333, 3px 3px #333`,
+    },
   },
   signIn:{
     backgroundColor: '#FBFF00 !important',
     height: 40,
     width: 150,
-    color: 'black'
+    color: 'black',
+    transition: theme.transitions.create(["transform", "box-shadow"]),
+    '&:hover':{
+      transform: "scale3d(1.1,1.1,1.1) translateX(3px)  !important",
+      boxShadow: `1px 1px #333, 2px 2px #333, 3px 3px #333`,
+    },
   },
   btnContainer:{
     display: 'flex',

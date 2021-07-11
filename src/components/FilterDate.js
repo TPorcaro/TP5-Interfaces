@@ -30,11 +30,12 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     datePicker:{
+        position: 'relative',
         width:150,
     },
     filterTitle:{
         position: 'relative',
-        margin:'0 auto 0 auto',
+        left:0,
         width:200,
       }
 }));
@@ -46,7 +47,7 @@ export default function FilterDate(props) {
     };
     return (
         <div className={classes.root}>
-             <Typography  align="center" className={classes.filterTitle}>
+             <Typography  align="left" className={classes.filterTitle}>
               {props.title}
             </Typography>
             <MuiPickersUtilsProvider  utils={LocalizedUtils} locale={esLocale}>

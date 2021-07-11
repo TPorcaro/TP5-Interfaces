@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import "../assets/styles/advertising.css";
 import { Grid } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
-class Advertising extends Component {
-    render() {
+const useStyles = makeStyles((theme) => ({
+    btn:{
+        height: 40,
+        width: 150,
+        color: 'black',
+        transition: theme.transitions.create(["transform", "box-shadow"]),
+        '&:hover':{
+          transform: "scale3d(1.1,1.1,1.1) translateX(3px)  !important",
+          boxShadow: `1px 1px #FBFF00, 2px 2px #FBFF00, 3px 3px #FBFF00`,
+        },
+    }
+}));
+export default function  Advertising() {
+    const classes = useStyles();
         return (
             <>
              <div className="advertisingCtn">
@@ -12,7 +25,7 @@ class Advertising extends Component {
                     <Grid item="true">
                         <h2>Publica tu espacio en AirNbn </h2>
                         <h2>y descubri como ganar dinero</h2>
-                        <Button variant="contained" color="primary">
+                        <Button className={classes.btn} variant="contained" color="primary">
                             Descubri como
                         </Button>
                     </Grid>
@@ -24,5 +37,3 @@ class Advertising extends Component {
             </>
         )
     }
-}
-export default Advertising;

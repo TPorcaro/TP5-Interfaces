@@ -8,6 +8,7 @@ import CardGroup from './components/CardGroup';
 import SearchBox from './components/SearchBox';
 import Advertising from './components/Advertising';
 import Search from './components/Search.js';
+import Detail from './components/Detail';
 class App extends Component {
   render() {
     let defaultText = 'bla bla bla bla bla bla';
@@ -25,7 +26,8 @@ class App extends Component {
             <CardGroup></CardGroup>
           </div>
           <StickyFooter></StickyFooter> */}
-          <Search />
+          {/* <Search /> */}
+          <Detail></Detail>
       </BrowserRouter>
     );
   }

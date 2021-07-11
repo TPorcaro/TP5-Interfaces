@@ -207,7 +207,7 @@ export default function Search(props) {
             <Typography align="center" className={classes.filterTitleDate}>
               Precios
             </Typography>
-            <FilterPrice title={'Rango de precios'}/>
+            <FilterPrice/>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} spacing={3}>

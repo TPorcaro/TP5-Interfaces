@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: 750,
     transition: theme.transitions.create(["transform"]),
     '&:hover':{
-      transform: "scale3d(1.1,1.1,1.1)  !important"
+      transform: "scale3d(1.05,1.05,1.05)  !important"
     },
   },
   details: {
