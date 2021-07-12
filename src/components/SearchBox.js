@@ -97,7 +97,7 @@ function SearchBox() {
         return val;
       }
     }return null;
-}).map((val, key) => {
+  }).map((val, key) => {
       return key <= 5 ? 
         <div className={classes.suggest} key={key}>
           <Typography variant="body1" color="black">
