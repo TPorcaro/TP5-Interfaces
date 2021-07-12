@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchBox from './SearchBox';
 import Advertising from './Advertising';
 import CardGroup from './CardGroup';
+import PackageGroup from './PackageGroup';
 import { Fade, Typography } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 
-import PackageGroup from './PackageGroup.js'
 const useStyles = makeStyles((theme) => ({
     loader:{
         position: 'absolute',
@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
             marginleft: 'auto',
             marginRight: 'auto',
         },
+    },
+    packageSugerencias: {
+        marginTop: theme.spacing(3),
+        marginBottom:theme.spacing(0),
     }
 }));
 
@@ -64,6 +68,10 @@ export default function Home(props) {
                                 Nuestras sugerencias
                             </Typography>
                             <CardGroup></CardGroup>
+                            <Typography className={classes.packageSugerencias} variant="h3">
+                                Paquetes turisticos
+                            </Typography>
+                            <PackageGroup></PackageGroup>
                         </Container>
                    </>
             }
