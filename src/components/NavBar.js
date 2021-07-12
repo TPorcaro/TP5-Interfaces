@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import logo from '../assets/airnbn.svg';
 import '../assets/styles/navBar.css';
+import { useHistory } from "react-router-dom";
 import Container from '@material-ui/core/Container'
 import LoginPopup from './LoginPopup.js';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -134,6 +135,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NavBar() {
+  const history = useHistory();
   const classes = useStyles();
   const [openPopup, setOpenPopup] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
@@ -181,7 +183,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Container className={classes.logoContainer}>
-            <IconButton onClick={() => {console.log('click logo')}} component="span" >
+            <IconButton onClick={() => history.push('/')} component="span" >
               <img src={logo} height={50} width={50} />
             <Typography className={classes.title}  variant="h6">
               AIRNBN

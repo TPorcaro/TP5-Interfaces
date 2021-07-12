@@ -7,6 +7,7 @@ import { Fade, Typography } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 
+import PackageGroup from './PackageGroup.js'
 const useStyles = makeStyles((theme) => ({
     loader:{
         position: 'absolute',
