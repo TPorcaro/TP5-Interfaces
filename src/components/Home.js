@@ -47,7 +47,7 @@ export default function Home(props) {
     useEffect(() => {
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            }, 3000);
         },[])
         const classes = useStyles();
     return (

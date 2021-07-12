@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Fade } from "@material-ui/core";
 import Select from '@material-ui/core/Select';
 import img1 from '../assets/images/casa-detail1.jpeg';
 import img2 from '../assets/images/casa-detail2.jpeg';
@@ -271,10 +271,11 @@ export default function ImageGallery(props) {
     }
 
     return (
-        <>
-        <Fade in={true}>
+            <>
+            
             <Grid container>
                 <Grid item xs={12}>
+                    <Fade in={true}>
                     <Paper variant="outlined" className={classes.containerRoot}>
                         <Grid container alignContent="space-between">
                             <Grid item>
@@ -380,6 +381,7 @@ export default function ImageGallery(props) {
                         </Grid>
                     </Grid>
                 </Paper>
+                </Fade>
             </Grid>
         </Grid>
             <Grid xs={12} item>
@@ -398,8 +400,7 @@ export default function ImageGallery(props) {
                     }
                 </Container>
             </Grid>
-        </Fade>
 
-        </>
+            </>
     );
 }

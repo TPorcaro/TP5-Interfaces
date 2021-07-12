@@ -4,11 +4,9 @@ import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from '@material-ui/core/InputBase';
 import { useHistory } from "react-router-dom";
-import { Fade, Grid } from "@material-ui/core";
+import { Fade, Grid, IconButton } from "@material-ui/core";
 import {  makeStyles } from '@material-ui/core/styles';
-import { Grid } from "@material-ui/core";
 import LoginPopup from './LoginPopup.js';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   searchIcon: {
@@ -19,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row-reverse',
+    zIndex : 10,
   },
   search: {
     position: 'relative',
@@ -109,37 +108,44 @@ function SearchBox() {
    :""
 })}  */
   const [searchTerm, setSearchTerm] = useState("  ");
+  const [openPopup, setOpenPopup] = useState(false);
+  const [login, setLogin] = useState(false);
   const history = useHistory();
   return (
-    <div className="searchCtn">
-      <Fade in={true}>
+    <Fade in={true}>
+      <div className="searchCtn">
+        <Grid container justify="center" >
+          <div className={classes.search}> 
+              <InputBase
+              placeholder="Buscar destino.."
+              onChange={(event) => setSearchTerm(event.target.value)}
+              onKeyPress={(e) => {
+                if(e.key == 'Enter'){
+                  history.push('/search')
+                }
+              }}
+                className={classes.input}
+                inputProps={{ 'aria-label': 'search' }}
+              />
 
-     
-      <Grid container="true" justify="center" >
-        <div className={classes.search}> 
-            <InputBase
-             placeholder="Buscar destino.."
-             onChange={(event) => setSearchTerm(event.target.value)}
-              className={classes.input}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <div className={classes.searchIcon}>
+              <Button onClick={() => console.log(12)} size="small">
+                <SearchIcon />
+              </Button>
+            </div>
+            </div> 
 
-          <div className={classes.searchIcon}>
-              <SearchIcon />
-          </div>
-          </div> 
+        </Grid>
 
-      </Grid>
-      
-        <LoginPopup 
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-        title="Iniciar sesión"
-        login={login}
-        setLogin={setLogin}
-        />
-       </Fade>
-    </div>
+          <LoginPopup 
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+          title="Iniciar sesión"
+          login={login}
+          setLogin={setLogin}
+          />
+      </div>
+    </Fade>
   );
 }
 
