@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
+import { Dialog, DialogContent } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Alert from '@material-ui/lab/Alert';
 
 function Copyright() {
   return (
@@ -53,8 +54,59 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginPopup(props)  {
     const classes = useStyles();
     const [acceptTerms, setAcceptTerms] = useState(false);
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+    const [mailStatus, setMailStatus] = useState(false);
+    const [passwordStatus, setPasswordStatus] = useState(false);
     const {  openPopup, setOpenPopup } = props;
-    console.log(props.login)
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (verifyPassword(password) /* && validateMail(mail) */){
+            localStorage.setItem("user", mail);
+            setMail('');
+            setPassword('');
+            setOpenPopup(false);
+        }
+    }
+    const verifyPassword = (activePassword) => {
+        let sizePass = false;
+        let minusculas = false;
+        let mayusculas = false;
+        let numerosCheck = false;
+        if(activePassword.length > 8){
+            sizePass = true;
+            var letras_mayusculas="ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
+            var letras="abcdefghyjklmnñopqrstuvwxyz";
+            var numeros="1234567890";
+            for (let i = 0; i < activePassword.length; i++) {
+                if (letras.indexOf(password.charAt(i),0)!==-1){
+                    minusculas = true;
+                }
+                else if (letras_mayusculas.indexOf(activePassword.charAt(i),0)!==-1){
+                    mayusculas = true;
+                }
+                else if (numeros.indexOf(activePassword.charAt(i),0)!==-1){
+                    numerosCheck = true;
+                }
+            }
+        }
+        if(sizePass  && minusculas && mayusculas && numerosCheck){
+            setPasswordStatus(false);
+            return true;
+        }
+        setPasswordStatus(true);
+        return false;
+    }
+    const validateMail = (Email) => {
+        const re = /^(([^<>()[]\.,;:\s@"]+(.[^<>()[]\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+        if(re.test(String(Email).toLowerCase())){
+            setMailStatus(false);
+            return true;
+        }
+        setMailStatus(true);
+        return false;
+    }
     return (
       <Dialog open={openPopup} >
         { props.login === true ?
@@ -75,7 +127,11 @@ export default function LoginPopup(props)  {
             <Typography component="h1" variant="h5">
             Iniciar sesión
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            { 
+            mailStatus ? <Alert severity="error">La direccion de correo no es valida</Alert>
+            :""
+            }
             <TextField
                 variant="outlined"
                 margin="normal"
@@ -85,8 +141,14 @@ export default function LoginPopup(props)  {
                 label="E-mail"
                 name="email"
                 autoComplete="email"
+                value={mail}
+                onChange={({target})=> setMail(target.value)}
                 autoFocus
             />
+            {
+            passwordStatus ?<Alert severity="error">La contraseña debe contener al menos 8 caracteres, incluir al menos un numero, minuscula y mayuscula</Alert>
+            :""
+            }
             <TextField
                 variant="outlined"
                 margin="normal"
@@ -96,6 +158,8 @@ export default function LoginPopup(props)  {
                 label="Contraseña"
                 type="password"
                 id="password"
+                value={password}
+                onChange={({target})=> setPassword(target.value)}
                 autoComplete="current-password"
             />
             <FormControlLabel
