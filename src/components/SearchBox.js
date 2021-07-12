@@ -2,9 +2,42 @@ import React, { useState } from "react";
 import "../assets/styles/search.css";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
+import InputBase from '@material-ui/core/InputBase';
+import {  makeStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
 import LoginPopup from './LoginPopup.js';
+
+const useStyles = makeStyles((theme) => ({
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    position: 'relative',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row-reverse',
+  },
+  search: {
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+    height: '65%',
+    backgroundColor: 'white',
+    marginBottom: 'auto',
+    marginTop: 'auto',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  inputRoot:{
+  },
+}));
+
+
 function SearchBox() {
+  const classes = useStyles();
+
   const options = [
     { title: "Alcalá de Henares" },
     { title: "Ávila" },
@@ -52,12 +85,20 @@ function SearchBox() {
     <div className="searchCtn">
       <Grid container="true" justify="center" >
         <Grid item="true">
-          <input
-            type="text"
-            placeholder="Buscar destino.."
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
-          {options.filter((val) => {
+        <div className={classes.search}> 
+            <InputBase
+             placeholder="Buscar destino.."
+             onChange={(event) => setSearchTerm(event.target.value)}
+              className={classes.input}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+
+          <div className={classes.searchIcon}>
+              <SearchIcon />
+          </div>
+          </div> 
+
+          {/* {options.filter((val) => {
             if (searchTerm.length > 2) { 
               if (val.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())) {
               return val;
@@ -72,13 +113,13 @@ function SearchBox() {
           ) : (
             ""
           );
-        })}
+        })} */}
         </Grid>
-        <Grid item="true">
+        {/* <Grid item="true">
           <Button size="large" className="btnSearch" onClick = {() => setOpenPopup(true)}>
             <SearchIcon />
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
         <LoginPopup 
         openPopup={openPopup}
