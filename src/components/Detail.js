@@ -19,6 +19,7 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageGallery from './ImageGallery';
 import { Grow } from '@material-ui/core';
+import { Fade } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     loader:{
         position: 'absolute',
@@ -42,7 +43,9 @@ export default function Detail(props) {
             {loading ?
             <CircularProgress size={100} className={classes.loader}></CircularProgress>
             : 
+            <Fade in={true}>
                 <ImageGallery/>
+            </Fade>
             }
         </>
     );

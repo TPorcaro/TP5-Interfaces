@@ -149,7 +149,7 @@ export default function CardHorizontal(props) {
                   </Icon>
                 }
             </Container>
-            <Typography className={classes.price} variant="h5" color="black" component="p">
+            <Typography className={classes.price} variant="h5" component="p">
               $ {props.price}
             </Typography>
           </CardContent>

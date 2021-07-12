@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row-reverse',
+    zIndex: 10,
   },
   inputRoot: {
     color: 'inherit',
@@ -183,7 +184,7 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Container className={classes.logoContainer}>
+          <Container  onClick={() => history.push('/')} className={classes.logoContainer}>
             <IconButton onClick={() => history.push('/')} component="span" >
               <img src={logo} height={50} width={50} />
             <Typography className={classes.title}  variant="h6">
@@ -194,6 +195,11 @@ export default function NavBar() {
           <div className={classes.search}> 
             <InputBase
               placeholder="Search…"
+              onKeyPress={(e) => {
+                if(e.key == 'Enter'){
+                  history.push('/search')
+                }
+              }}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

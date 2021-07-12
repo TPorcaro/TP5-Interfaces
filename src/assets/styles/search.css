@@ -8,20 +8,20 @@
     flex-direction: column;
     font-family: Arial, Helvetica, sand-serif;
 }
-.searchCtn input{
-    margin-top: 20px;
+ .searchCtn input{
     width: 300px;
-    height: 40px;
+    height:60px;
     font-size: 20px;
     padding-left: 10px;
-}
-p{  
-    width: 315px;
+} 
+/* p{  
+    
+    width: 300px;
     height: 40px;
     background-color: white;
     margin: 0px;
     font-size: 18px;
-}
+} */
 .btnSearch{
     margin-top: 1.5rem !important;
 }

@@ -2,13 +2,18 @@ import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
-import { Grid, Typography } from "@material-ui/core";
-import { Fade } from '@material-ui/core';
-import img1 from '../assets/images/casa-detail1.jpeg'
-import img2 from '../assets/images/casa-detail2.jpeg'
-import img3 from '../assets/images/casa-detail3.jpeg'
-import img4 from '../assets/images/casa-detail4.jpeg'
-import img5 from '../assets/images/casa-detail5.jpeg'
+import { Grid, Typography, Fade } from "@material-ui/core";
+import Select from '@material-ui/core/Select';
+import img1 from '../assets/images/casa-detail1.jpeg';
+import img2 from '../assets/images/casa-detail2.jpeg';
+import img3 from '../assets/images/casa-detail3.jpeg';
+import img4 from '../assets/images/casa-detail4.jpeg';
+import img5 from '../assets/images/casa-detail5.jpeg';
+import user1 from '../assets/images/user1.jpg';
+import user2 from '../assets/images/user2.jpg';
+import user3 from '../assets/images/user3.jpg';
+import user4 from '../assets/images/user4.jpg';
+import cloneDeep from 'lodash.clonedeep';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageListItem from '@material-ui/core/ImageListItem';
@@ -20,6 +25,7 @@ import FilterDate from './FilterDate';
 import { Button } from '@material-ui/core';
 import LikesDislikes from './LikesDislikes';
 import Comentary from './Comentary';
+
 const useStyles = makeStyles((theme) => ({
     containerRoot:{
         marginLeft: theme.spacing(3),
@@ -184,6 +190,10 @@ const useStyles = makeStyles((theme) => ({
         "100%":{
             transform: 'rotate(0deg)'
         }
+    },
+    scroll:{
+        height: '450px',
+        overflow: 'auto',
     }
 }));
 const detailText= "Se ha transformado una antigua nave en maravillosos espacios habitacionales, donde reinan las zonas abiertas, que aportan gran luminosidad gracias a los amplios ventanales, otorgándoles una importante ventilación y haciendo de las estancias un verdadero placer.";
@@ -214,7 +224,32 @@ const itemData = [
       index: 4
     },
   ];
-
+  const commentaries = [
+    {
+        img: user2,
+        name: "Maria del carmen",
+        positive: true,
+        text: "Bastante fria la casa pero tenia buena calefaccion!", 
+    },
+    {
+        img: user1,
+        name: "Hernan",
+        positive: true,
+        text: "La pileta hermosa. Buena señal de internet", 
+    },
+    {
+        img: user3,
+        name: "Federico",
+        positive: false,
+        text: "La heladera no funcionaba, pileta sin mantenimiento", 
+    },
+    {
+        img: user4,
+        name: "Martin",
+        positive: true,
+        text: "Hermoso patio, ideal para que jueguen los chicos!", 
+    },
+  ]
 
 export default function ImageGallery(props) {
   const classes = useStyles();
@@ -236,81 +271,81 @@ export default function ImageGallery(props) {
     }
 
     return (
-        <>
-        <Fade in={true}>
-
+            <>
+            
             <Grid container>
                 <Grid item xs={12}>
+                    <Fade in={true}>
                     <Paper variant="outlined" className={classes.containerRoot}>
-                    <Grid container alignContent="space-between">
-                        <Grid item>
-                            <Paper variant="outlined" className={classes.root}>
-                            <IconButton className={classes.favoriteIcon} onMouseEnter={() => setHoverFavoriteIcon(true)} onMouseLeave={() => setHoverFavoriteIcon(false)}>
-                                {hoverFavoriteIcon 
-                                ? <FavoriteIcon  />
-                                : <FavoriteBorderIcon />
-                                }
-                            </IconButton>
-                                <ImageList sx={{ width: 700, height: 600 }} cols={1} rowHeight={500}>
-                                    <ImageListItem cols={1}>
-                                        <img onClick={() => nextImg(-1)}srcSet={`${itemData[imageToShow].img}?w=500&h=450&auto=format 1x,
-                                                ${itemData[imageToShow].img}?w=500&h=450&auto=format&dpr= 2x`}></img>
-                                    </ImageListItem>
-                                </ImageList>
-                                <ImageList sx={{ width: 300, height: 450 }} cols={10}  rowHeight={120}>
-                                    {itemData.map((item) => (
-                                        <ImageListItem  cols={2.00} key={item.img}>
-                                        <img onClick={() => nextImg(item.index)}
-                                            srcSet={`${item.img}?w=500&h=450&auto=format 1x,
-                                                ${item.img}?w=500&h=450&auto=format&dpr= 2x`}
-                                            alt={item.title}
-                                            loading="lazy"
-                                        />
+                        <Grid container alignContent="space-between">
+                            <Grid item>
+                                <Paper variant="outlined" className={classes.root}>
+                                <IconButton className={classes.favoriteIcon} onMouseEnter={() => setHoverFavoriteIcon(true)} onMouseLeave={() => setHoverFavoriteIcon(false)}>
+                                    {hoverFavoriteIcon 
+                                    ? <FavoriteIcon  />
+                                    : <FavoriteBorderIcon />
+                                    }
+                                </IconButton>
+                                    <ImageList sx={{ width: 700, height: 600 }} cols={1} rowHeight={500}>
+                                        <ImageListItem cols={1}>
+                                            <img onClick={() => nextImg(-1)}srcSet={`${itemData[imageToShow].img}?w=500&h=450&auto=format 1x,
+                                                    ${itemData[imageToShow].img}?w=500&h=450&auto=format&dpr= 2x`}></img>
                                         </ImageListItem>
-                                    ))}
-                                </ImageList>
-                            </Paper>
+                                    </ImageList>
+                                    <ImageList sx={{ width: 300, height: 450 }} cols={10}  rowHeight={120}>
+                                        {itemData.map((item) => (
+                                            <ImageListItem  cols={2.00} key={item.img}>
+                                            <img onClick={() => nextImg(item.index)}
+                                                srcSet={`${item.img}?w=500&h=450&auto=format 1x,
+                                                    ${item.img}?w=500&h=450&auto=format&dpr= 2x`}
+                                                alt={item.title}
+                                                loading="lazy"
+                                            />
+                                            </ImageListItem>
+                                        ))}
+                                    </ImageList>
+                                </Paper>
+                            </Grid>
+                            <Grid item>
+                                <Paper variant="outlined" className={classes.rootRight}>
+                                    <Typography className={classes.title}>
+                                        Casa en Buenos Aires
+                                    </Typography>
+                                    <Container className={classes.dateContainer}>
+                                        <FilterDate title={'Fecha de inicio:'}/>
+                                        <FilterDate title={'Fecha de salida:'}/>
+                                    </Container>
+                                    <Button id="btnRent" className={classes.rent} variant="contained" color = "primary">
+                                        Alquilar
+                                    </Button>
+                                    <Container className={classes.containerText}>
+                                            <Typography className={classes.textLeft} variant="h4" align="center">
+                                                Precio 
+                                            </Typography>
+                                            <Typography className={classes.textRight} variant="h4" align="center">
+                                                $800
+                                            </Typography>
+                                    </Container>
+                                    <Container className={classes.containerText}>
+                                            <Typography className={classes.textLeft} variant="h6" align="center">
+                                                Capacidad
+                                            </Typography>
+                                            <Typography className={classes.textRight} variant="h6" align="center">
+                                                4 personas
+                                            </Typography>
+                                    </Container>
+                                    <Container className={classes.containerText}>
+                                            <Typography className={classes.textLeft} variant="h6" align="center">
+                                                Camas
+                                            </Typography>
+                                            <Typography className={classes.textRight} variant="h6" align="center">
+                                                3(4 plazas)
+                                            </Typography>
+                                    </Container>
+                                    <LikesDislikes likes={37} dislikes={7}/>
+                                </Paper>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Paper variant="outlined" className={classes.rootRight}>
-                                <Typography className={classes.title}>
-                                    Casa en Buenos Aires
-                                </Typography>
-                                <Container className={classes.dateContainer}>
-                                    <FilterDate title={'Fecha de inicio:'}/>
-                                    <FilterDate title={'Fecha de salida:'}/>
-                                </Container>
-                                <Button id="btnRent" className={classes.rent} variant="contained" color = "primary">
-                                    Alquilar
-                                </Button>
-                                <Container className={classes.containerText}>
-                                        <Typography className={classes.textLeft} variant="h4" align="center">
-                                            Precio 
-                                        </Typography>
-                                        <Typography className={classes.textRight} variant="h4" align="center">
-                                            $800
-                                        </Typography>
-                                </Container>
-                                <Container className={classes.containerText}>
-                                        <Typography className={classes.textLeft} variant="h6" align="center">
-                                            Capacidad
-                                        </Typography>
-                                        <Typography className={classes.textRight} variant="h6" align="center">
-                                            4 personas
-                                        </Typography>
-                                </Container>
-                                <Container className={classes.containerText}>
-                                        <Typography className={classes.textLeft} variant="h6" align="center">
-                                            Camas
-                                        </Typography>
-                                        <Typography className={classes.textRight} variant="h6" align="center">
-                                            3(4 plazas)
-                                        </Typography>
-                                </Container>
-                                <LikesDislikes likes={37} dislikes={7}/>
-                            </Paper>
-                        </Grid>
-                    </Grid>
                     <Grid container alignContent="space-between">
                         <Grid item>
                             <Container className={classes.root2}>
@@ -346,19 +381,26 @@ export default function ImageGallery(props) {
                         </Grid>
                     </Grid>
                 </Paper>
+                </Fade>
             </Grid>
-                <Grid xs={12} item>
-                    <Container>
-                        <Typography variant="h3" align="center">Comentarios</Typography>
-                        <Comentary>
-                                            
-                        </Comentary>
-                    </Container>
-                </Grid>
+        </Grid>
+            <Grid xs={12} item>
+                    <Typography variant="h3" align="center">Comentarios ({commentaries.length})</Typography>
+                <Container className={classes.scroll}>
+                   
+                    {
+                        commentaries.map((item)=>{
+                            return <Comentary     
+                            img = {item.img}
+                            name = {item.name}
+                            positive = {item.positive}
+                            text = {item.text}
+                            />
+                        })
+                    }
+                </Container>
             </Grid>
-        </Fade>
-       
-        
-        </>
+
+            </>
     );
 }
