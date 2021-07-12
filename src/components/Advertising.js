@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
         height: '20rem',
         marginLeft: '20px',
         backgroundImage: 'url("../add.jpeg")',
+        [theme.breakpoints.down('lg')]: {
+            width: '2rem ',
+            height: '2rem',
+        },
         backgroundRepeat: 'no-repeat',
     },
     btn:{

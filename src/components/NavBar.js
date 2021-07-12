@@ -132,6 +132,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(["transform"]),
     transform: 'rotate(0deg)',
   },
+
 }));
 
 export default function NavBar() {
@@ -199,8 +200,8 @@ export default function NavBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-             <div className={classes.searchIcon}>
-              <SearchIcon />
+             <div className={classes.searchIcon} onClick={() => console.log("sdasda")}>
+              <SearchIcon /> 
             </div>
           </div> 
           <Container className={classes.btnContainer}>
