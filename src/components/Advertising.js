@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('lg')]: {
             left: 350,
-            top: 300,
+            top: 100,
             marginleft: 'auto',
             marginRight: 'auto',
         },

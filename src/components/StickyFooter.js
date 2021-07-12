@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Container from '@material-ui/core/Container';
 import Grid  from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -10,14 +10,23 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 link: {
   cursor: "pointer",
-}
-
+},
+ 
 })); 
 export default function StickyFooter() {
   const classes = useStyles();
+  const [loading,setLoading] = React.useState(true);
+    
   const [openPopup, setOpenPopup] = useState(false);
   const [login, setLogin] = useState(false);
   const session = localStorage.getItem('user');
+
+
+  useEffect(() => {
+    setTimeout(() => {
+        setLoading(false);
+    }, 3000);
+  })
 
   const openRegister = () => {
     setLogin(false);
@@ -32,7 +41,10 @@ export default function StickyFooter() {
     setOpenPopup(true);
   }
   return (
-    <Box px={{xs: 3, sm:10}} py={{xs: 5, sm:10}}bgcolor="#8AA8DC" color="white" >
+    <>
+    {
+      loading ? "" :
+    <Box px={{xs: 3, sm:10}} py={{xs: 5, sm:10}} bgcolor="#8AA8DC" className={classes.container} color="white" >
       <Container maxWidth="lg">
         <Grid container spacing={6}>
           <Grid item xd={12} sm={6}>
@@ -96,6 +108,7 @@ export default function StickyFooter() {
         setLogin={setLogin}
         />
     </Box>
-    
+  }
+  </>
   );
 }

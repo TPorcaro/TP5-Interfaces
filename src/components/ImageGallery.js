@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(0),
         padding: theme.spacing(1),
         width: '96.5%',
+        [theme.breakpoints.down('lg')]: {
+            width: '90%',
+        },
     },
     root:{
         paddingTop: theme.spacing(0.1),
@@ -286,9 +289,9 @@ export default function ImageGallery(props) {
                                     : <FavoriteBorderIcon />
                                     }
                                 </IconButton>
-                                    <ImageList sx={{ width: 700, height: 600 }} cols={1} rowHeight={500}>
+                                    <ImageList sx={{ width: 500, height: 420 }} cols={1} rowHeight={500}>
                                         <ImageListItem cols={1}>
-                                            <img onClick={() => nextImg(-1)}srcSet={`${itemData[imageToShow].img}?w=500&h=450&auto=format 1x,
+                                            <img onClick={() => nextImg(-1)}srcSet={`${itemData[imageToShow].img}?w=400&h=450&auto=format 1x,
                                                     ${itemData[imageToShow].img}?w=500&h=450&auto=format&dpr= 2x`}></img>
                                         </ImageListItem>
                                     </ImageList>

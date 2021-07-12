@@ -29,6 +29,7 @@ class App extends Component {
             >
             </Route>
             </Switch>
+            <StickyFooter></StickyFooter>
       </BrowserRouter>
     );
   }

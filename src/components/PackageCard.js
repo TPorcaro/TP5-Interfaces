@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 20,
         position: 'absolute',
         top: 16,
-        left: -200,
+        left: -210,
         backgroundColor: '#FBFF00',
         paddingLeft: 10,
         paddingRight: 10,
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   },
   price:{
     position: 'relative',
-    top: -30,
+    top: -39,
     right : -470,
     bottom: 55,
     width: 100,
