@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '.1px .1px',
         fontSize: 20,
         position: 'absolute',
-        display: 'block',
         top: 20,
         left: -35,
         backgroundColor: '#FBFF00',
