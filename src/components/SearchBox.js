@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "../assets/styles/search.css";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-import { Grid } from "@material-ui/core";
-import LoginPopup from './LoginPopup.js';
-function SearchBox() {
+import { Grid } from "@material-ui/core";function SearchBox() {
   const options = [
     { title: "Alcalá de Henares" },
     { title: "Ávila" },
@@ -46,8 +44,7 @@ function SearchBox() {
     { title: "Londres" },
   ];
   const [searchTerm, setSearchTerm] = useState("  ");
-  const [openPopup, setOpenPopup] = useState(false);
-  const [login, setLogin] = useState(false);
+
   return (
     <div className="searchCtn">
       <Grid container="true" justify="center" >
@@ -75,18 +72,11 @@ function SearchBox() {
         })}
         </Grid>
         <Grid item="true">
-          <Button size="large" className="btnSearch" onClick = {() => setOpenPopup(true)}>
+          <Button size="large" className="btnSearch">
             <SearchIcon />
           </Button>
         </Grid>
       </Grid>
-        <LoginPopup 
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-        title="Iniciar sesión"
-        login={login}
-        setLogin={setLogin}
-        />
     </div>
   );
 }

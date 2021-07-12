@@ -15,19 +15,17 @@ class App extends Component {
         let defaultTitle = 'Title';
         let defaultPrice = 5000;
     return (
-
        <BrowserRouter basename="./" >
          <NavBar></NavBar>
-          {/*  
+            
           <SearchBox></SearchBox>
           <Advertising />
           <div className="margened">
             
             <CardGroup></CardGroup>
           </div>
-          <StickyFooter></StickyFooter> */}
-          {/* <Search /> */}
-          <Detail></Detail>
+          <StickyFooter></StickyFooter> 
+         {/*  <Search /> */}
       </BrowserRouter>
     );
   }
