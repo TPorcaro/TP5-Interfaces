@@ -6,6 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import {  makeStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
 import LoginPopup from './LoginPopup.js';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   searchIcon: {
@@ -30,7 +31,18 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
-  inputRoot:{
+  suggest:{
+    position: 'relative',
+    display: 'flex',
+    width: '300px',
+    height: '60px',
+    backgroundColor: 'white',
+    marginBottom: 'auto',
+    marginTop: 'auto',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
   },
 }));
 
@@ -38,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 function SearchBox() {
   const classes = useStyles();
 
-  const options = [
+/*   const options = [
     { title: "Alcalá de Henares" },
     { title: "Ávila" },
     { title: "Barcelona" },
@@ -78,13 +90,28 @@ function SearchBox() {
     { title: "Macau" },
     { title: "Londres" },
   ];
+  
+  {options.filter((val) => {
+    if (searchTerm.length > 2) { 
+      if (val.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+        return val;
+      }
+    }return null;
+}).map((val, key) => {
+      return key <= 5 ? 
+        <div className={classes.suggest} key={key}>
+          <Typography variant="body1" color="black">
+            {val.title}
+          </Typography>
+        </div>
+   :""
+})}  */
   const [searchTerm, setSearchTerm] = useState("  ");
   const [openPopup, setOpenPopup] = useState(false);
   const [login, setLogin] = useState(false);
   return (
     <div className="searchCtn">
       <Grid container="true" justify="center" >
-        <Grid item="true">
         <div className={classes.search}> 
             <InputBase
              placeholder="Buscar destino.."
@@ -98,29 +125,8 @@ function SearchBox() {
           </div>
           </div> 
 
-          {/* {options.filter((val) => {
-            if (searchTerm.length > 2) { 
-              if (val.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())) {
-              return val;
-              }
-          }return null;
-        })
-        .map((val, key) => {
-          return key <= 5 ? (
-            <div className="user" key={key}>
-              <p>{val.title}</p>
-            </div>
-          ) : (
-            ""
-          );
-        })} */}
-        </Grid>
-        {/* <Grid item="true">
-          <Button size="large" className="btnSearch" onClick = {() => setOpenPopup(true)}>
-            <SearchIcon />
-          </Button>
-        </Grid> */}
       </Grid>
+      
         <LoginPopup 
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
