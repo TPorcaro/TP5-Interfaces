@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '.1px .1px',
         fontSize: 20,
         position: 'absolute',
-        top: 20,
-        left: -35,
+        top: 16,
+        left: -200,
         backgroundColor: '#FBFF00',
         paddingLeft: 10,
         paddingRight: 10,
@@ -32,18 +32,18 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 5
     },
     card: {
-    display: 'flex',
-    height:150,
-    marginBottom: 40,
-    marginRight:20,
-    width: 750,
-    [theme.breakpoints.down('lg')]:{
-     width : 550,
-    },
-    transition: theme.transitions.create(["transform"]),
-    '&:hover':{
-      transform: "scale3d(1.05,1.05,1.05)  !important"
-    },
+        display: 'flex',
+        height:150,
+        marginBottom: 40,
+        marginRight:20,
+        width: 750,
+        [theme.breakpoints.down('lg')]:{
+            width : 550,
+        },
+        transition: theme.transitions.create(["transform"]),
+        '&:hover':{
+            transform: "scale3d(1.05,1.05,1.05)  !important"
+        },
   },
   details: {
     display: 'flex',
@@ -119,6 +119,7 @@ export default function PackageCard(props) {
   return (
     <Grow in={true}>
       <Card className={classes.card}>
+          
         <CardMedia
           className={classes.cover}
           image={props.img}
@@ -142,6 +143,9 @@ export default function PackageCard(props) {
               {props.text}
             </Typography>
 
+        <Typography className={classes.typeCard} align="center" variant="h5" color="black" component="p">
+            Paquete
+        </Typography>
           </Container>
             <Container className={classes.iconContainer}>
                 {props.hasAirConditioner &&
@@ -168,9 +172,7 @@ export default function PackageCard(props) {
             <Typography className={classes.price} variant="h5" color="black" component="p">
               $ {props.price}
             </Typography>
-            <Typography className={classes.typeCard} align="center" variant="h5" color="black" component="p">
-            Paquete
-            </Typography>
+            
           </CardContent>
         </div>
       </Card>
