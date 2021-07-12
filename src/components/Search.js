@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Typography } from "@material-ui/core";
 import FilterCategory from './FilterCategory';

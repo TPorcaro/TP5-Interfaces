@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,12 +8,19 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
-import { Icon } from '@material-ui/core';
 import logo from '../assets/airnbn.svg';
+import '../assets/styles/navBar.css';
 import Container from '@material-ui/core/Container'
+import LoginPopup from './LoginPopup.js';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import Badge from '@material-ui/core/Badge';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  background:{
+    backgroundColor: '#4166A5 !important',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -31,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     display: 'flex',
     marginRight: theme.spacing(120),
+    [theme.breakpoints.down('lg')]:{
+      marginRight: theme.spacing(55),
+     },
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -83,20 +93,68 @@ const useStyles = makeStyles((theme) => ({
     width: 150,
     color: 'black'
   },
+  pubEspacio:{
+    backgroundColor: '#FBFF00 !important',
+    height: 40,
+    width: 185,
+    color: 'black',
+    marginRight: 15,
+  },
+
   btnContainer:{
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
     left: -100,
-  }
+  },
+  iconRight:{
+    transition: theme.transitions.create(["transform"]),
+    transform: 'rotate(-90deg)',
+  },
+  iconDown:{
+    transition: theme.transitions.create(["transform"]),
+    transform: 'rotate(0deg)',
+  },
 }));
 
 export default function NavBar() {
   const classes = useStyles();
+  const [openPopup, setOpenPopup] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [login, setLogin] = useState(false);
+  const openRegister = () => {
+    setLogin(false);
+    setOpenPopup(true);
+  }
+  const closeSession = () => {
+    localStorage.removeItem("user");
+    window.location.reload();
+  }
+  const openLogin = () => {
+    setLogin(true);
+    setOpenPopup(true);
+  }
+  const dropdownProfile = () =>  {
+    document.getElementById("myDropdown").classList.toggle("show");
+    setOpenProfile(!openProfile);
+  }
 
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div className={classes.root} >
+      <AppBar position="static" className={classes.background}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -106,7 +164,7 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Container classname={classes.logoContainer}>
+          <Container className={classes.logoContainer}>
             <IconButton onClick={() => {console.log('click logo')}} component="span" >
               <img src={logo} height={50} width={50} />
             <Typography className={classes.title}  variant="h6">
@@ -128,15 +186,57 @@ export default function NavBar() {
             </div>
           </div> 
           <Container className={classes.btnContainer}>
-            <Button className={classes.register} variant="contained">
-                Registrese
-            </Button>
-            <Button className={classes.signIn} variant="contained">
+          { 
+              localStorage.getItem("user") !== null ? 
+              <Button variant="outlined"  size="large" className={classes.pubEspacio} >
+              Publicar espacio
+               </Button>
+              :
+              <Button className={classes.register} variant="contained" onClick={()=> openRegister()}>
+              Registrese
+              </Button>
+          }    
+          { 
+              localStorage.getItem("user") !== null ? 
+              <>
+              <Badge color="secondary" badgeContent={5}>
+               <Button size="medium"   className="favorite">Favoritos
+               </Button>
+              </Badge>
+              <div className="dropdown">
+              <Button size="medium"  onClick={() => dropdownProfile()} className="dropbtn">
+                {
+                  openProfile ? 
+                  <>
+                  Mi cuenta <ArrowDownwardIcon fontSize="inherit" className={classes.iconDown}/>
+                  </>
+                  :
+                  <>
+                  Mi cuenta <ArrowDownwardIcon fontSize="inherit" className={classes.iconRight}/>
+                  </>
+                }
+              </Button>
+                  <div id="myDropdown" className="dropdown-content">
+                      <a href="#">Perfil</a>
+                      <a href="#">Configuracion</a>
+                      <a onClick={() =>closeSession()}  style={{cursor:'pointer'}}>Cerrar sesion</a>
+                  </div>
+              </div>
+              </>
+              :
+              <Button className={classes.signIn} variant="contained" onClick={()=> openLogin()}>
                 Iniciar sesion
-            </Button>
+              </Button>
+          }         
           </Container>
         </Toolbar>
       </AppBar>
+      <LoginPopup 
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        login={login}
+        setLogin={setLogin}
+        />
     </div>
   );
 }

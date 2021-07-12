@@ -17,15 +17,15 @@ class App extends Component {
 
        <BrowserRouter basename="./" >
          <NavBar></NavBar>
-          {/*  
+            
           <SearchBox></SearchBox>
           <Advertising />
           <div className="margened">
             
             <CardGroup></CardGroup>
           </div>
-          <StickyFooter></StickyFooter> */}
-          <Search />
+          <StickyFooter></StickyFooter> 
+         {/*  <Search /> */}
       </BrowserRouter>
     );
   }

@@ -1,7 +1,5 @@
 import React from 'react'
-import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';

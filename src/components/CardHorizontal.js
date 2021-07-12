@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 40,
     marginRight:20,
     width: 750,
+    [theme.breakpoints.down('lg')]:{
+     width : 600,
+    },
     transition: theme.transitions.create(["transform"]),
     '&:hover':{
       transform: "scale3d(1.1,1.1,1.1)  !important"
@@ -41,8 +44,11 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     color: 'gray',
     right:-450,
-    width:5,
-    height:5,
+    width:10,
+    height:10,
+    [theme.breakpoints.down('lg')]:{
+      right : -350,
+     },
     transition: theme.transitions.create(["transform"]),
     transform : 'perspective(0px) rotateY(0deg)',
     '&:hover':{
@@ -55,7 +61,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: 55,
     width: 100,
     margin: 0,
-    padding: 0
+    padding: 0,
+    [theme.breakpoints.down('lg')]:{
+      right : -300,
+     },
   },
   containerText: {
       position: 'relative',
