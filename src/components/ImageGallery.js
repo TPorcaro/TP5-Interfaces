@@ -4,11 +4,15 @@ import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Typography } from "@material-ui/core";
 import Select from '@material-ui/core/Select';
-import img1 from '../assets/images/casa-detail1.jpeg'
-import img2 from '../assets/images/casa-detail2.jpeg'
-import img3 from '../assets/images/casa-detail3.jpeg'
-import img4 from '../assets/images/casa-detail4.jpeg'
-import img5 from '../assets/images/casa-detail5.jpeg'
+import img1 from '../assets/images/casa-detail1.jpeg';
+import img2 from '../assets/images/casa-detail2.jpeg';
+import img3 from '../assets/images/casa-detail3.jpeg';
+import img4 from '../assets/images/casa-detail4.jpeg';
+import img5 from '../assets/images/casa-detail5.jpeg';
+import user1 from '../assets/images/user1.jpg';
+import user2 from '../assets/images/user2.jpg';
+import user3 from '../assets/images/user3.jpg';
+import user4 from '../assets/images/user4.jpg';
 import cloneDeep from 'lodash.clonedeep';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -21,6 +25,7 @@ import FilterDate from './FilterDate';
 import { Button } from '@material-ui/core';
 import LikesDislikes from './LikesDislikes';
 import Comentary from './Comentary';
+
 const useStyles = makeStyles((theme) => ({
     containerRoot:{
         marginLeft: theme.spacing(3),
@@ -185,6 +190,10 @@ const useStyles = makeStyles((theme) => ({
         "100%":{
             transform: 'rotate(0deg)'
         }
+    },
+    scroll:{
+        height: '450px',
+        overflow: 'auto',
     }
 }));
 const detailText= "Se ha transformado una antigua nave en maravillosos espacios habitacionales, donde reinan las zonas abiertas, que aportan gran luminosidad gracias a los amplios ventanales, otorgándoles una importante ventilación y haciendo de las estancias un verdadero placer.";
@@ -215,7 +224,32 @@ const itemData = [
       index: 4
     },
   ];
-
+  const commentaries = [
+    {
+        img: user2,
+        name: "Maria del carmen",
+        positive: true,
+        text: "Bastante fria la casa pero tenia buena calefaccion!", 
+    },
+    {
+        img: user1,
+        name: "Hernan",
+        positive: true,
+        text: "La pileta hermosa. Buena señal de internet", 
+    },
+    {
+        img: user3,
+        name: "Federico",
+        positive: false,
+        text: "La heladera no funcionaba, pileta sin mantenimiento", 
+    },
+    {
+        img: user4,
+        name: "Martin",
+        positive: true,
+        text: "Hermoso patio, ideal para que jueguen los chicos!", 
+    },
+  ]
 
 export default function ImageGallery(props) {
   const classes = useStyles();
@@ -348,11 +382,19 @@ export default function ImageGallery(props) {
             </Paper>
         </Grid>
             <Grid xs={12} item>
-                <Container>
-                    <Typography variant="h3" align="center">Comentarios</Typography>
-                    <Comentary>
-                                          
-                    </Comentary>
+                    <Typography variant="h3" align="center">Comentarios ({commentaries.length})</Typography>
+                <Container className={classes.scroll}>
+                   
+                    {
+                        commentaries.map((item)=>{
+                            return <Comentary     
+                            img = {item.img}
+                            name = {item.name}
+                            positive = {item.positive}
+                            text = {item.text}
+                            />
+                        })
+                    }
                 </Container>
             </Grid>
         </Grid>
