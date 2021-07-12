@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "../assets/styles/search.css";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-import { Grid } from "@material-ui/core";function SearchBox() {
+import { useHistory } from "react-router-dom";
+import { Fade, Grid } from "@material-ui/core";function SearchBox() {
   const options = [
     { title: "Alcalá de Henares" },
     { title: "Ávila" },
@@ -44,9 +45,11 @@ import { Grid } from "@material-ui/core";function SearchBox() {
     { title: "Londres" },
   ];
   const [searchTerm, setSearchTerm] = useState("  ");
-
+  const history = useHistory();
   return (
     <div className="searchCtn">
+      <Fade in={true}>
+      
       <Grid container="true" justify="center" >
         <Grid item="true">
           <input
@@ -73,10 +76,11 @@ import { Grid } from "@material-ui/core";function SearchBox() {
         </Grid>
         <Grid item="true">
           <Button size="large" className="btnSearch">
-            <SearchIcon />
+            <SearchIcon onClick={() => history.push('/search')} />
           </Button>
         </Grid>
       </Grid>
+      </Fade>
     </div>
   );
 }

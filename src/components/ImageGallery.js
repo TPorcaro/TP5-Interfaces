@@ -1,15 +1,14 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Typography } from "@material-ui/core";
-import Select from '@material-ui/core/Select';
+import { Fade } from '@material-ui/core';
 import img1 from '../assets/images/casa-detail1.jpeg'
 import img2 from '../assets/images/casa-detail2.jpeg'
 import img3 from '../assets/images/casa-detail3.jpeg'
 import img4 from '../assets/images/casa-detail4.jpeg'
 import img5 from '../assets/images/casa-detail5.jpeg'
-import cloneDeep from 'lodash.clonedeep';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageListItem from '@material-ui/core/ImageListItem';
@@ -221,7 +220,6 @@ export default function ImageGallery(props) {
   const classes = useStyles();
   const [imageToShow, setNextImg] = React.useState(0);
   const [hoverFavoriteIcon, setHoverFavoriteIcon] = React.useState(false);
-
     const nextImg = (param) => {
         if(param === -1){
             let nextIndex = 0;
@@ -239,123 +237,126 @@ export default function ImageGallery(props) {
 
     return (
         <>
-        <Grid container>
-            <Grid item xs={12}>
-                <Paper variant="outlined" className={classes.containerRoot}>
-                <Grid container alignContent="space-between">
-                    <Grid item>
-                        <Paper variant="outlined" className={classes.root}>
-                        <IconButton className={classes.favoriteIcon} onMouseEnter={() => setHoverFavoriteIcon(true)} onMouseLeave={() => setHoverFavoriteIcon(false)}>
-                            {hoverFavoriteIcon 
-                            ? <FavoriteIcon  />
-                            : <FavoriteBorderIcon />
-                            }
-                        </IconButton>
-                            <ImageList sx={{ width: 700, height: 600 }} cols={1} rowHeight={500}>
-                                <ImageListItem cols={1}>
-                                    <img onClick={() => nextImg(-1)}srcSet={`${itemData[imageToShow].img}?w=500&h=450&auto=format 1x,
-                                            ${itemData[imageToShow].img}?w=500&h=450&auto=format&dpr= 2x`}></img>
-                                </ImageListItem>
-                            </ImageList>
-                            <ImageList sx={{ width: 300, height: 450 }} cols={10}  rowHeight={120}>
-                                {itemData.map((item) => (
-                                    <ImageListItem  cols={2.00} key={item.img}>
-                                    <img onClick={() => nextImg(item.index)}
-                                        srcSet={`${item.img}?w=500&h=450&auto=format 1x,
-                                            ${item.img}?w=500&h=450&auto=format&dpr= 2x`}
-                                        alt={item.title}
-                                        loading="lazy"
-                                    />
+        <Fade in={true}>
+
+            <Grid container>
+                <Grid item xs={12}>
+                    <Paper variant="outlined" className={classes.containerRoot}>
+                    <Grid container alignContent="space-between">
+                        <Grid item>
+                            <Paper variant="outlined" className={classes.root}>
+                            <IconButton className={classes.favoriteIcon} onMouseEnter={() => setHoverFavoriteIcon(true)} onMouseLeave={() => setHoverFavoriteIcon(false)}>
+                                {hoverFavoriteIcon 
+                                ? <FavoriteIcon  />
+                                : <FavoriteBorderIcon />
+                                }
+                            </IconButton>
+                                <ImageList sx={{ width: 700, height: 600 }} cols={1} rowHeight={500}>
+                                    <ImageListItem cols={1}>
+                                        <img onClick={() => nextImg(-1)}srcSet={`${itemData[imageToShow].img}?w=500&h=450&auto=format 1x,
+                                                ${itemData[imageToShow].img}?w=500&h=450&auto=format&dpr= 2x`}></img>
                                     </ImageListItem>
-                                ))}
-                            </ImageList>
-                        </Paper>
-                    </Grid>
-                    <Grid item>
-                        <Paper variant="outlined" className={classes.rootRight}>
-                            <Typography className={classes.title}>
-                                Casa en Buenos Aires
-                            </Typography>
-                            <Container className={classes.dateContainer}>
-                                <FilterDate title={'Fecha de inicio:'}/>
-                                <FilterDate title={'Fecha de salida:'}/>
-                            </Container>
-                            <Button id="btnRent" className={classes.rent} variant="contained" color = "primary">
-                                Alquilar
-                            </Button>
-                            <Container className={classes.containerText}>
-                                    <Typography className={classes.textLeft} variant="h4" align="center">
-                                        Precio 
-                                    </Typography>
-                                    <Typography className={classes.textRight} variant="h4" align="center">
-                                        $800
-                                    </Typography>
-                            </Container>
-                            <Container className={classes.containerText}>
-                                    <Typography className={classes.textLeft} variant="h6" align="center">
-                                        Capacidad
-                                    </Typography>
-                                    <Typography className={classes.textRight} variant="h6" align="center">
-                                        4 personas
-                                    </Typography>
-                            </Container>
-                            <Container className={classes.containerText}>
-                                    <Typography className={classes.textLeft} variant="h6" align="center">
-                                        Camas
-                                    </Typography>
-                                    <Typography className={classes.textRight} variant="h6" align="center">
-                                        3(4 plazas)
-                                    </Typography>
-                            </Container>
-                            <LikesDislikes likes={37} dislikes={7}/>
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <Grid container alignContent="space-between">
-                    <Grid item>
-                        <Container className={classes.root2}>
-                            <Paper className={classes.paperContainer}>
-                                <Typography variant="h3" align="center" className={classes.sectionTitle}> 
-                                    Detalles de publicacion
-                                </Typography>
-                                <Typography variant="h5" align="left" className={classes.servicesTitle}>
-                                    Servicios
-                                </Typography>
-                                <Grid container alignContent="space-between">
-                                    <Grid xs={6} item className={classes.serviceContainer}>
-                                        <Typography variant="subtitle1">. Aire Acondicionado</Typography>
-                                    </Grid>
-                                    <Grid xs={6} item className={classes.serviceContainer}>
-                                        <Typography variant="subtitle1">. Calefacción</Typography>
-                                    </Grid>
-                                    <Grid xs={6} item className={classes.serviceContainer}>
-                                        <Typography variant="subtitle1">. Wi-Fi</Typography>
-                                    </Grid>
-                                    <Grid xs={6} item className={classes.serviceContainer}>
-                                        <Typography variant="subtitle1">. Patio</Typography>
-                                    </Grid>
-                                </Grid>
-                                <Typography variant="h5" align="left" className={classes.servicesTitle}>
-                                    Descripcion general
-                                </Typography>
-                                <Paper>
-                                    <Typography className={classes.descriptionText} variant="subtitle1">{detailText}</Typography>
-                                </Paper>
+                                </ImageList>
+                                <ImageList sx={{ width: 300, height: 450 }} cols={10}  rowHeight={120}>
+                                    {itemData.map((item) => (
+                                        <ImageListItem  cols={2.00} key={item.img}>
+                                        <img onClick={() => nextImg(item.index)}
+                                            srcSet={`${item.img}?w=500&h=450&auto=format 1x,
+                                                ${item.img}?w=500&h=450&auto=format&dpr= 2x`}
+                                            alt={item.title}
+                                            loading="lazy"
+                                        />
+                                        </ImageListItem>
+                                    ))}
+                                </ImageList>
                             </Paper>
-                        </Container>
+                        </Grid>
+                        <Grid item>
+                            <Paper variant="outlined" className={classes.rootRight}>
+                                <Typography className={classes.title}>
+                                    Casa en Buenos Aires
+                                </Typography>
+                                <Container className={classes.dateContainer}>
+                                    <FilterDate title={'Fecha de inicio:'}/>
+                                    <FilterDate title={'Fecha de salida:'}/>
+                                </Container>
+                                <Button id="btnRent" className={classes.rent} variant="contained" color = "primary">
+                                    Alquilar
+                                </Button>
+                                <Container className={classes.containerText}>
+                                        <Typography className={classes.textLeft} variant="h4" align="center">
+                                            Precio 
+                                        </Typography>
+                                        <Typography className={classes.textRight} variant="h4" align="center">
+                                            $800
+                                        </Typography>
+                                </Container>
+                                <Container className={classes.containerText}>
+                                        <Typography className={classes.textLeft} variant="h6" align="center">
+                                            Capacidad
+                                        </Typography>
+                                        <Typography className={classes.textRight} variant="h6" align="center">
+                                            4 personas
+                                        </Typography>
+                                </Container>
+                                <Container className={classes.containerText}>
+                                        <Typography className={classes.textLeft} variant="h6" align="center">
+                                            Camas
+                                        </Typography>
+                                        <Typography className={classes.textRight} variant="h6" align="center">
+                                            3(4 plazas)
+                                        </Typography>
+                                </Container>
+                                <LikesDislikes likes={37} dislikes={7}/>
+                            </Paper>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Paper>
-        </Grid>
-            <Grid xs={12} item>
-                <Container>
-                    <Typography variant="h3" align="center">Comentarios</Typography>
-                    <Comentary>
-                                          
-                    </Comentary>
-                </Container>
+                    <Grid container alignContent="space-between">
+                        <Grid item>
+                            <Container className={classes.root2}>
+                                <Paper className={classes.paperContainer}>
+                                    <Typography variant="h3" align="center" className={classes.sectionTitle}> 
+                                        Detalles de publicacion
+                                    </Typography>
+                                    <Typography variant="h5" align="left" className={classes.servicesTitle}>
+                                        Servicios
+                                    </Typography>
+                                    <Grid container alignContent="space-between">
+                                        <Grid xs={6} item className={classes.serviceContainer}>
+                                            <Typography variant="subtitle1">. Aire Acondicionado</Typography>
+                                        </Grid>
+                                        <Grid xs={6} item className={classes.serviceContainer}>
+                                            <Typography variant="subtitle1">. Calefacción</Typography>
+                                        </Grid>
+                                        <Grid xs={6} item className={classes.serviceContainer}>
+                                            <Typography variant="subtitle1">. Wi-Fi</Typography>
+                                        </Grid>
+                                        <Grid xs={6} item className={classes.serviceContainer}>
+                                            <Typography variant="subtitle1">. Patio</Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Typography variant="h5" align="left" className={classes.servicesTitle}>
+                                        Descripcion general
+                                    </Typography>
+                                    <Paper>
+                                        <Typography className={classes.descriptionText} variant="subtitle1">{detailText}</Typography>
+                                    </Paper>
+                                </Paper>
+                            </Container>
+                        </Grid>
+                    </Grid>
+                </Paper>
             </Grid>
-        </Grid>
+                <Grid xs={12} item>
+                    <Container>
+                        <Typography variant="h3" align="center">Comentarios</Typography>
+                        <Comentary>
+                                            
+                        </Comentary>
+                    </Container>
+                </Grid>
+            </Grid>
+        </Fade>
        
         
         </>

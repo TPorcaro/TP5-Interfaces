@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
@@ -18,16 +18,32 @@ import cloneDeep from 'lodash.clonedeep';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageGallery from './ImageGallery';
+import { Grow } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
-    
+    loader:{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginRight: '-50%',
+    }
 }));
 
 
 export default function Detail(props) {
-  
+    const [loading,setLoading] = React.useState(true);
+    useEffect(() => {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+        },[])
+        const classes = useStyles();
     return (
         <>
-            <ImageGallery/>
+            {loading ?
+            <CircularProgress size={100} className={classes.loader}></CircularProgress>
+            : 
+                <ImageGallery/>
+            }
         </>
     );
 }

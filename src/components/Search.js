@@ -18,6 +18,7 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FilterDate from './FilterDate';
 import FilterPrice from './FilterPrice';
+import { Fade } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     titleCtn : {  width: '100%',},
@@ -146,6 +147,7 @@ export default function Search(props) {
   ];
     const [sort, setSort] = React.useState('');
     const [loading, setLoading] = React.useState(false);
+
     const classes = useStyles();
     let title = 'Buenos Aires';
     let quantity= '6';
@@ -167,86 +169,92 @@ export default function Search(props) {
             })
       return cardsSorted;
       }
-    
       React.useEffect(() => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
         }, 3000);
       },[sort])
+      React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 3000);
+      },[])
     return (
-        <>
-        <div className={classes.titleCtn}>
-            <h4 className={classes.searchTitle}> Resultados de busqueda para : {title} ({quantity})</h4>
-        </div>
-        <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={3} sm={3}>
-          <Paper className={classes.filterBox}>
-            <Typography align="center" className={classes.filterTitle}>
-              Filtros
-            </Typography>
-            <Divider />
-            <FilterCategory 
-            title ="Tipo de espacio"
-            items = {espacios} 
-            quantity={espacios.length}/>
-            <Divider className={classes.divider} />
-            <FilterCategory 
-            title ="Servicios"
-            items = {servicios} 
-            quantity={servicios.length}/>
-            <Divider />
-            <Typography align="center" className={classes.filterTitleDate}>
-              Fechas de su estadia
-            </Typography>
-            <FilterDate title={'Fecha de inicio:'}/>
-            <FilterDate title={'Fecha de salida:'}/>
-            <Divider />
-            <Typography align="center" className={classes.filterTitleDate}>
-              Precios
-            </Typography>
-            <FilterPrice/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} spacing={3}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Ordenar por :</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={sort}
-                onChange={handleSortChange}
-              >
-                <MenuItem default value={0}>Más relevantes</MenuItem>
-                <MenuItem value={1}>Mayor precio</MenuItem>
-                <MenuItem value={2}>Menor precio</MenuItem>
-              </Select>
-            </FormControl>
-            {loading ?
-            <CircularProgress size={100} className={classes.loader}/>
-            :<>
-            <Container className={classes.cardContainer}>
-              {sortCards(sort).map((card,i) => {
-                return <CardHorizontal
-                  title={card.title}
-                  text={card.text}
-                  price={card.price}
-                  img={card.img}
-                  hasHeater={card.hasHeater}
-                  hasTv={card.hasTv}
-                  hasAirConditioner={card.hasAirConditioner}
-                  hasWifi={card.hasWifi}
-                  type={card.type}
-                />
-              })}
-            </Container>
-            </>
-            }
-        </Grid>
-      </Grid>
-    </div>
-
-        </>
+      <>
+      <div className={classes.titleCtn}>
+              <h4 className={classes.searchTitle}> Resultados de busqueda para : {title} ({quantity})</h4>
+              </div>
+              <div className={classes.root}>
+            <Fade in={true}>
+            <Grid container spacing={3}>
+              <Grid item xs={3} sm={3}>
+                <Paper className={classes.filterBox}>
+                  <Typography align="center" className={classes.filterTitle}>
+                    Filtros
+                  </Typography>
+                  <Divider />
+                  <FilterCategory 
+                  title ="Tipo de espacio"
+                  items = {espacios} 
+                  quantity={espacios.length}/>
+                  <Divider className={classes.divider} />
+                  <FilterCategory 
+                  title ="Servicios"
+                  items = {servicios} 
+                  quantity={servicios.length}/>
+                  <Divider />
+                  <Typography align="center" className={classes.filterTitleDate}>
+                    Fechas de su estadia
+                  </Typography>
+                  <FilterDate title={'Fecha de inicio:'}/>
+                  <FilterDate title={'Fecha de salida:'}/>
+                  <Divider />
+                  <Typography align="center" className={classes.filterTitleDate}>
+                    Precios
+                  </Typography>
+                  <FilterPrice/>
+                </Paper>
+              </Grid>
+              <Grid item xs={12} sm={6} spacing={3}>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Ordenar por :</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={sort}
+                      onChange={handleSortChange}
+                    >
+                      <MenuItem default value={0}>Más relevantes</MenuItem>
+                      <MenuItem value={1}>Mayor precio</MenuItem>
+                      <MenuItem value={2}>Menor precio</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {loading ?
+                  <CircularProgress size={100} className={classes.loader}/>
+                  :<>
+                  <Container className={classes.cardContainer}>
+                    {sortCards(sort).map((card,i) => {
+                      return <CardHorizontal
+                        title={card.title}
+                        text={card.text}
+                        price={card.price}
+                        img={card.img}
+                        hasHeater={card.hasHeater}
+                        hasTv={card.hasTv}
+                        hasAirConditioner={card.hasAirConditioner}
+                        hasWifi={card.hasWifi}
+                        type={card.type}
+                      />
+                    })}
+                  </Container>
+                  </>
+                  }
+              </Grid>
+            </Grid>
+            </Fade>
+          </div>
+          </>
     );
 }

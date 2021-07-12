@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import StickyFooter from './components/StickyFooter';
-import Card from './components/Card'
-import CardGroup from './components/CardGroup';
+import Home from './components/Home'
 import SearchBox from './components/SearchBox';
 import Advertising from './components/Advertising';
 import Search from './components/Search.js';
@@ -17,18 +16,22 @@ class App extends Component {
     return (
        <BrowserRouter basename="./" >
          <NavBar></NavBar>
-            
-          <SearchBox></SearchBox>
-          <Advertising />
-          <div className="margened">
-            
-            <CardGroup></CardGroup>
-          </div>
-          <StickyFooter></StickyFooter> 
-         {/*  <Search /> */}
+            <Switch>
+            <Route exact path="/"
+            component={Home}
+            >
+            </Route>
+            <Route exact path="/search"
+            component={Search}
+            >
+            </Route>
+            <Route exact path="/detail"
+            component={Detail}
+            >
+            </Route>
+            </Switch>
       </BrowserRouter>
     );
   }
 }
-
 export default App;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import { useHistory } from "react-router-dom";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -56,10 +57,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 export default function ImgMediaCard(props) {
+  const history = useHistory();
   const classes = useStyles();
   const [hoverFavoriteIcon, setHoverFavoriteIcon] = React.useState(false);
   return (
-    <Card className={classes.root} >
+    <Card className={classes.root} onClick={() => history.push('/detail')} >
       <CardActionArea>
         <CardMedia      
           component="img"

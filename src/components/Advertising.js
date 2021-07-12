@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "../assets/styles/advertising.css";
-import { Grid } from "@material-ui/core";
+import { Fade, Grid } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,6 +21,7 @@ export default function  Advertising() {
         return (
             <>
              <div className="advertisingCtn">
+                <Fade in={true}>
                 <Grid container="true" >
                     <Grid item="true">
                         <h2>Publica tu espacio en AirNbn </h2>
@@ -33,6 +34,7 @@ export default function  Advertising() {
                         <div className="picture"></div>
                     </Grid>
                 </Grid>
+                </Fade>
              </div>
             </>
         )
