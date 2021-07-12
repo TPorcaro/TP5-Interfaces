@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0,
     transform: 'rotate(-45deg)',
     zIndex: 5
+  },
+  text:{
+    height: 50,
+    width: 220,
   }
 }));
 export default function ImgMediaCard(props) {
@@ -77,10 +81,10 @@ export default function ImgMediaCard(props) {
           }
         </IconButton>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" align="left" component="h2">
             {props.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography className={classes.text} align="left" variant="body2" color="textSecondary" component="p">
             {props.text}
           </Typography>
         </CardContent>

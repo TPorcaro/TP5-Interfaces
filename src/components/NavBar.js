@@ -82,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2
   },
   register:{
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
     backgroundColor: '#FBFF00 !important',
     height: 40,
     color: 'black',
@@ -97,6 +100,9 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
     width: 150,
     color: 'black',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
     transition: theme.transitions.create(["transform", "box-shadow"]),
     '&:hover':{
       transform: "scale3d(1.1,1.1,1.1) translateX(3px)  !important",

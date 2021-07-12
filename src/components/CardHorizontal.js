@@ -114,9 +114,11 @@ export default function CardHorizontal(props) {
             }
           </IconButton>
           <Container className={classes.containerText}>
+            {props.type && 
               <Typography className={classes.type} variant="overline" >
                   {props.type} en alquiler
               </Typography>
+            }
             <Typography component="h5" variant="subtitle1">
               {props.title}
             </Typography>

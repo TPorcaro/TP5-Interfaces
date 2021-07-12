@@ -10,9 +10,6 @@ import Search from './components/Search.js';
 import Detail from './components/Detail';
 class App extends Component {
   render() {
-    let defaultText = 'bla bla bla bla bla bla';
-        let defaultTitle = 'Title';
-        let defaultPrice = 5000;
     return (
        <BrowserRouter basename="./" >
          <NavBar></NavBar>
