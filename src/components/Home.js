@@ -5,7 +5,7 @@ import Advertising from './Advertising';
 import CardGroup from './CardGroup';
 import { Fade } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
-
+import PackageGroup from './PackageGroup.js'
 const useStyles = makeStyles((theme) => ({
     loader:{
         position: 'absolute',
@@ -35,6 +35,7 @@ export default function Home(props) {
                     <Advertising />
                     <div className="margened">
                         <CardGroup></CardGroup>
+                        <PackageGroup></PackageGroup>
                     </div> 
                    </>
             }

@@ -7,6 +7,8 @@ import Home from './components/Home'
 import SearchBox from './components/SearchBox';
 import Advertising from './components/Advertising';
 import Search from './components/Search.js';
+import { useHistory } from "react-router-dom";
+
 import Detail from './components/Detail';
 class App extends Component {
   render() {
