@@ -12,8 +12,6 @@ import format from "date-fns/format";
 
 import {
   DatePicker,
-  TimePicker,
-  DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 class LocalizedUtils extends DateFnsUtils {
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       }
 }));
 export default function FilterDate(props) {
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
+    const [selectedDate, setSelectedDate] = React.useState(null);
     const classes = useStyles();
     const handleDateChange = (date) => {
       setSelectedDate(date);

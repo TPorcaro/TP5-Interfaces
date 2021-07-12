@@ -3,12 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Typography } from "@material-ui/core";
-import FilterCategory from './FilterCategory';
-import CardHorizontal from './CardHorizontal';
-import Divider from '@material-ui/core/Divider';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import img1 from '../assets/images/casas-busqueda.jpg'
 import img2 from '../assets/images/casas-busqueda2.jpg'
@@ -19,9 +13,88 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import ImageList from '@material-ui/core/ImageList';
+import StarTwoToneIcon from '@material-ui/icons/StarTwoTone';
+import FilterDate from './FilterDate';
+import { Button } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     root:{
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        paddingTop: theme.spacing(0.1),
+        paddingLeft: theme.spacing(3),
+        paddingRight:theme.spacing(3),
+        margin: 100,
+        overflow: 'hidden',
+        width: 700
+    },
+    starIcon:{
+        position: 'relative',
+        color: 'yellow',
+        marginTop: theme.spacing(0.1),
+        right:-685,
+        width: 35,
+        height:35,
+    },
+    title:{
+        fontSize:36,
+        width:400,
+
+        margin: '0 auto 0 auto',
+    },
+    dateContainer:{
+        marginTop: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    rent:{
+        position:'relative',
+        height: 40,
+        float: 'right',
+        right: 20,
+        width: 150,
+        color: 'whiter',
+        transition: theme.transitions.create(["transform", "box-shadow"]),
+        transform : 'perspective(0px) rotateY(0deg)',
+        '&:hover':{
+            transform: "scale3d(1.1,1.1,1.1) translateX(3px)  !important",
+            boxShadow: `1px 1px #333, 2px 2px #333, 3px 3px #333`,
+        },
+        '&:focus':{
+            transform: "scale3d(1.1,1.1,1.1) translateX(3px)  !important",
+            animation: "$click 1s ease-in-out",
+        },
+    },
+    '@keyframes click': {
+        "0%":{
+            transform: 'rotate(0)'
+        },
+        "11%":{
+            transform: 'rotate(5deg)'
+        },
+        "22%":{
+            transform: 'rotate(0deg)'
+        },
+        "33%":{
+            transform: 'rotate(-5deg)'
+        },
+        "44%":{
+            transform: 'rotate(0deg)'
+        },
+        "55%":{
+            transform: 'rotate(0)'
+        },
+        "66%":{
+            transform: 'rotate(5deg)'
+        },
+        "77%":{
+            transform: 'rotate(0deg)'
+        },
+        "88%":{
+            transform: 'rotate(-5deg)'
+        },
+        "100%":{
+            transform: 'rotate(0deg)'
+        }
     }
 }));
 const itemData = [
@@ -50,28 +123,52 @@ const itemData = [
 
 export default function ImageGallery(props) {
   const classes = useStyles();
+  const handleClickImg = (e) => {
+    console.log(e.target);
+  }
     return (
-        <>
-            <Paper variant="outlined" className={classes.root}>
-                <ImageList sx={{ width: 560, height: 450 }} rowHeight={450}>
-                    <ImageListItem>
-                        <img srcSet={`${img1}?w=500&h=450&auto=format 1x,
-                                ${img1}?w=500&h=450&auto=format&dpr= 2x`}></img>
-                    </ImageListItem>
-                </ImageList>
-                <ImageList sx={{ width: 300, height: 450 }} cols={20}  rowHeight={100}>
-                    {itemData.map((item) => (
-                        <ImageListItem cols={2.00} key={item.img}>
-                        <img
-                            srcSet={`${item.img}?w=500&h=450&auto=format 1x,
-                                ${item.img}?w=500&h=450&auto=format&dpr= 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                        </ImageListItem>
-                    ))}
-                </ImageList>
-            </Paper>
+        <> 
+            <Grid container alignContent="space-between">
+                <Grid item>
+                    <Paper variant="outlined" className={classes.root}>
+                        <StarTwoToneIcon className={classes.starIcon}>
+                        </StarTwoToneIcon>
+                        <ImageList sx={{ width: 700, height: 600 }} cols={1} rowHeight={500}>
+                            <ImageListItem cols={1}>
+                                <img srcSet={`${img1}?w=500&h=450&auto=format 1x,
+                                        ${img1}?w=500&h=450&auto=format&dpr= 2x`}></img>
+                            </ImageListItem>
+                        </ImageList>
+                        <ImageList sx={{ width: 300, height: 450 }} cols={10}  rowHeight={120}>
+                            {itemData.map((item) => (
+                                <ImageListItem  cols={2.00} key={item.img}>
+                                <img
+                                    srcSet={`${item.img}?w=500&h=450&auto=format 1x,
+                                        ${item.img}?w=500&h=450&auto=format&dpr= 2x`}
+                                    alt={item.title}
+                                    loading="lazy"
+                                />
+                                </ImageListItem>
+                            ))}
+                        </ImageList>
+                    </Paper>
+                </Grid>
+                <Grid item>
+                        <Paper variant="outlined" className={classes.root}>
+                            <Typography className={classes.title}>
+                                Casa en Buenos Aires
+                            </Typography>
+                            <Container className={classes.dateContainer}>
+                                <FilterDate title={'Fecha de inicio:'}/>
+                                <FilterDate title={'Fecha de salida:'}/>
+                            </Container>
+                            <Button id="btnRent" className={classes.rent} variant="contained" color = "primary">
+                                Alquilar
+                            </Button>
+                        </Paper>
+                </Grid>
+            </Grid>
+            
         </>
     );
 }
